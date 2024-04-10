@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   login:
-    container_name: hotel-services
+    container_name: facility-services
     image: coderbillzay/admin-facility
     ports:
       - '28645:28645'
