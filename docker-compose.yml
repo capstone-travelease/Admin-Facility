@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  login:
+    container_name: hotel-services
+    image: coderbillzay/admin-facility
+    ports:
+      - '28645:28645'
+    volumes:
+      - ./:/server
+    restart: always
