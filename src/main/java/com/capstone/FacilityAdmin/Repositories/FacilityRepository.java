@@ -11,20 +11,21 @@ import java.time.LocalDate;
 
 @Repository
 public interface FacilityRepository extends JpaRepository<Facilities, Long> {
+    @Transactional
     @Modifying
     @Query(value = "INSERT INTO facilities(facility_name, facility_type, facility_image)" +
             "VALUES(?1,?2,?3)", nativeQuery = true)
-    void addFacility(String facilityName, String facilityType, String facilityImage);
+    void addFacility(String facilityName, Integer facilityType, String facilityImage);
 
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE facilities SET \n" +
             "facility_name = ?2, facility_type =?3, facility_image = ?4\n" +
             "WHERE facility_id = ?1", nativeQuery = true)
-    void updateFacility(Integer id, String facilityName, String facilityType, String facilityImage);
+    void updateFacility(Integer id, String facilityName, Integer facilityType, String facilityImage);
 
     @Transactional
-    @Modifying(clearAutomatically = true)
+    @Modifying
     @Query(value = "DELETE FROM facilities WHERE facility_id = ?1", nativeQuery = true)
-    void deleteFacility(Integer id);
+    int deleteFacility(Integer id);
 }

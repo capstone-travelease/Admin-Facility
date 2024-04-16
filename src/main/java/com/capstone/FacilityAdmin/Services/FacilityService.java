@@ -2,8 +2,9 @@ package com.capstone.FacilityAdmin.Services;
 
 import com.capstone.FacilityAdmin.DTOs.RequestAdd;
 import com.capstone.FacilityAdmin.Entities.Facilities;
+import com.capstone.FacilityAdmin.Entities.FacilityType;
 import com.capstone.FacilityAdmin.Repositories.FacilityRepository;
-import jakarta.transaction.Transactional;
+import com.capstone.FacilityAdmin.Repositories.FacilityTypeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,19 +14,27 @@ import java.util.List;
 @Service
 public class FacilityService {
     private final FacilityRepository facilityRepository;
+    private final FacilityTypeRepository facilityTypeRepository;
+
     private String FOLDER_PATH = "/facility_images/";
 
-
-    public FacilityService(FacilityRepository facilityRepository) {
+    public FacilityService(FacilityRepository facilityRepository, FacilityTypeRepository facilityTypeRepository) {
         this.facilityRepository = facilityRepository;
+        this.facilityTypeRepository = facilityTypeRepository;
     }
 
+    /* Get Facilities */
     public List<Facilities> listFacilities(){
         List<Facilities> result = facilityRepository.findAll();
         return result;
     }
 
-    @Transactional
+    public List<FacilityType> listType(){
+        List<FacilityType> result = facilityTypeRepository.findAll();
+        return result;
+    }
+
+    /* Add Facilities */
     public Integer addFacilities(RequestAdd request, MultipartFile image){
         try {
             // the path of folder has existed in local
@@ -41,6 +50,18 @@ public class FacilityService {
         }
     }
 
+    public Integer addFacilitiesType(FacilityType name){
+        try {
+            facilityTypeRepository.addFacilityType(name.getFacility_type_name());
+            return 1;
+        }
+        catch (Exception error){
+            System.out.println(error);
+            return 2;
+        }
+    }
+
+    /* Update Facilities */
     public Integer updateFacilities(RequestAdd body, Integer hotelId, MultipartFile image){
         String fileUrl = FOLDER_PATH+image.getOriginalFilename();
         try{
@@ -49,16 +70,41 @@ public class FacilityService {
             return 1;
         }
         catch (Exception error){
+            System.out.println(error);
             return 2;
         }
     }
 
-    public Integer deleteFacilities(Integer hotelId){
+    public Integer updateFacilitiesType(FacilityType name, Integer id){
         try{
-            facilityRepository.deleteFacility(hotelId);
+            facilityTypeRepository.updateFacilityType(id, name.getFacility_type_name());
             return 1;
         }
         catch (Exception error){
+            System.out.println(error);
+            return 2;
+        }
+    }
+
+    /* Delete Facilities */
+    public Integer deleteFacilities(Integer facilityId){
+        try{
+            facilityRepository.deleteFacility(facilityId);
+            return 1;
+        }
+        catch (Exception error){
+            System.out.println(error);
+            return 2;
+        }
+    }
+
+    public Integer deleteFacilitiesType(Integer facilityId){
+        try{
+            facilityTypeRepository.deleteFacilityType(facilityId);
+            return 1;
+        }
+        catch (Exception error){
+            System.out.println(error);
             return 2;
         }
     }
