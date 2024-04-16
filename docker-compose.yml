@@ -7,4 +7,6 @@ services:
       - '28645:28645'
     volumes:
       - ./:/server
+      - ./var/www/html/facility_image:/facility_image
+      - ./var/www/html/icon:/icon
     restart: always

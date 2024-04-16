@@ -5,7 +5,9 @@ import com.capstone.FacilityAdmin.DTOs.ResponseFacility;
 import com.capstone.FacilityAdmin.DTOs.ResponseStatus;
 import com.capstone.FacilityAdmin.Entities.Facilities;
 import com.capstone.FacilityAdmin.Services.FacilityService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -28,8 +30,8 @@ public class FacilityController {
     }
 
     @PostMapping("/facility/add")
-    public ResponseStatus addFacilities(@RequestBody RequestAdd request){
-        Integer addStatus = facilityService.addFacilities(request);
+    public ResponseStatus addFacilities(@RequestPart("data") RequestAdd request, @RequestPart("file") MultipartFile image){
+        Integer addStatus = facilityService.addFacilities(request, image);
         if(addStatus == 1){
             return new ResponseStatus(
                     200,
@@ -47,8 +49,8 @@ public class FacilityController {
     }
 
     @PostMapping("/facility/update/{id}")
-    public ResponseStatus updateFacilities(@RequestBody RequestAdd body, @PathVariable Integer id){
-        Integer updateStatus = facilityService.updateFacilities(body, id);
+    public ResponseStatus updateFacilities(@RequestBody RequestAdd body, @PathVariable Integer id, @RequestParam("image") MultipartFile image){
+        Integer updateStatus = facilityService.updateFacilities(body, id, image);
         if(updateStatus == 1){
             return new ResponseStatus(
                     200,
