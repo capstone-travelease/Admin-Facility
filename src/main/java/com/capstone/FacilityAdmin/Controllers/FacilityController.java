@@ -18,7 +18,7 @@ public class FacilityController {
         this.facilityService = facilityService;
     }
 
-    @GetMapping("/hotel-facility")
+    @GetMapping("/facilities")
     public ResponseFacility getFacilities(){
         return new ResponseFacility(
                 200,
@@ -27,7 +27,7 @@ public class FacilityController {
         );
     }
 
-    @PostMapping("/hotel-facility/add")
+    @PostMapping("/facility/add")
     public ResponseStatus addFacilities(@RequestBody RequestAdd request){
         Integer addStatus = facilityService.addFacilities(request);
         if(addStatus == 1){
@@ -46,7 +46,7 @@ public class FacilityController {
         }
     }
 
-    @PostMapping("/hotel-facility/update/{id}")
+    @PostMapping("/facility/update/{id}")
     public ResponseStatus updateFacilities(@RequestBody RequestAdd body, @PathVariable Integer id){
         Integer updateStatus = facilityService.updateFacilities(body, id);
         if(updateStatus == 1){
@@ -65,7 +65,7 @@ public class FacilityController {
         }
     }
 
-    @PostMapping("/hotel-facility/delete/{id}")
+    @PostMapping("/facility/delete/{id}")
     public ResponseStatus deleteFacilities(@PathVariable Integer id){
         Integer updateStatus = facilityService.deleteFacilities(id);
         if(updateStatus == 1){
