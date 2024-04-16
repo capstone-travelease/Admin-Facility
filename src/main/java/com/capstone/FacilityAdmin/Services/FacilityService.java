@@ -32,7 +32,7 @@ public class FacilityService {
             String fileUrl = FOLDER_PATH+image.getOriginalFilename();
             // transfer from data of api to folder
             image.transferTo(new File(fileUrl));
-            facilityRepository.addFacility(request.getFacility_name(), request.getFacility_type(), image.getOriginalFilename());
+            facilityRepository.addFacility(request.getFacility_name(), request.getFacility_type(), fileUrl);
             return 1;
         }
         catch (Exception error){
