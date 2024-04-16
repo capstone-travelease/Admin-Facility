@@ -42,8 +42,10 @@ public class FacilityService {
     }
 
     public Integer updateFacilities(RequestAdd body, Integer hotelId, MultipartFile image){
+        String fileUrl = FOLDER_PATH+image.getOriginalFilename();
         try{
-            facilityRepository.updateFacility(hotelId, body.getFacility_name(), body.getFacility_type(), image.getOriginalFilename());
+            image.transferTo(new File(fileUrl));
+            facilityRepository.updateFacility(hotelId, body.getFacility_name(), body.getFacility_type(), fileUrl);
             return 1;
         }
         catch (Exception error){
