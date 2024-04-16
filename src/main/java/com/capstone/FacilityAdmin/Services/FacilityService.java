@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class FacilityService {
     private final FacilityRepository facilityRepository;
-    private String FOLDER_PATH = "/facility_image/";
+    private String FOLDER_PATH = "/facility_images/";
 
 
     public FacilityService(FacilityRepository facilityRepository) {
