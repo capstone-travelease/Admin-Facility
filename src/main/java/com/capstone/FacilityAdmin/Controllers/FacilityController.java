@@ -49,8 +49,8 @@ public class FacilityController {
     }
 
     @PostMapping("/facility/update/{id}")
-    public ResponseStatus updateFacilities(@RequestBody RequestAdd body, @PathVariable Integer id, @RequestParam("image") MultipartFile image){
-        Integer updateStatus = facilityService.updateFacilities(body, id, image);
+    public ResponseStatus updateFacilities(@RequestPart("data") RequestAdd request, @RequestPart("file") MultipartFile image, @PathVariable Integer id){
+        Integer updateStatus = facilityService.updateFacilities(request, id, image);
         if(updateStatus == 1){
             return new ResponseStatus(
                     200,
