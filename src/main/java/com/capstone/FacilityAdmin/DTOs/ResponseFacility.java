@@ -6,10 +6,10 @@ import java.util.List;
 
 public class ResponseFacility {
     private Integer code;
-    private List<Facilities> data;
+    private List<FacilityDTO> data;
     private String message;
 
-    public ResponseFacility(Integer code, List<Facilities> data, String message) {
+    public ResponseFacility(Integer code, List<FacilityDTO> data, String message) {
         this.code = code;
         this.data = data;
         this.message = message;
@@ -23,11 +23,11 @@ public class ResponseFacility {
         this.code = code;
     }
 
-    public List<Facilities> getData() {
+    public List<FacilityDTO> getData() {
         return data;
     }
 
-    public void setData(List<Facilities> data) {
+    public void setData(List<FacilityDTO> data) {
         this.data = data;
     }
 

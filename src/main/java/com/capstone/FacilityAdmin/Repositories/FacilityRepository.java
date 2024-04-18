@@ -1,5 +1,6 @@
 package com.capstone.FacilityAdmin.Repositories;
 
+import com.capstone.FacilityAdmin.DTOs.FacilityDTO;
 import com.capstone.FacilityAdmin.Entities.Facilities;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,9 +9,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface FacilityRepository extends JpaRepository<Facilities, Long> {
+    @Query("SELECT new com.capstone.FacilityAdmin.DTOs.FacilityDTO(f.facility_id, f.facility_name, ft.facility_type_name, f.facility_image) FROM Facilities f\n" +
+            "INNER JOIN FacilityType ft ON ft.facility_type_id = f.facility_type \n" +
+            "ORDER BY f.facility_id")
+    List<FacilityDTO> listFacilities();
+
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO facilities(facility_name, facility_type, facility_image)" +

@@ -1,5 +1,6 @@
 package com.capstone.FacilityAdmin.Services;
 
+import com.capstone.FacilityAdmin.DTOs.FacilityDTO;
 import com.capstone.FacilityAdmin.DTOs.RequestAdd;
 import com.capstone.FacilityAdmin.Entities.Facilities;
 import com.capstone.FacilityAdmin.Entities.FacilityType;
@@ -24,8 +25,8 @@ public class FacilityService {
     }
 
     /* Get Facilities */
-    public List<Facilities> listFacilities(){
-        List<Facilities> result = facilityRepository.findAll();
+    public List<FacilityDTO> listFacilities(){
+        List<FacilityDTO> result = facilityRepository.listFacilities();
         return result;
     }
 
