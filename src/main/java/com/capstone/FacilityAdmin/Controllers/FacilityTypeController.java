@@ -9,7 +9,6 @@ import com.capstone.FacilityAdmin.Services.FacilityService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST})
 @RestController
 @RequestMapping(path = "/admin/api")
 public class FacilityTypeController {
@@ -27,6 +26,7 @@ public class FacilityTypeController {
         );
     }
 
+    @CrossOrigin(origins = "*", methods = {RequestMethod.POST})
     @PostMapping("/facility-type/add")
     public ResponseStatus addFacilityType(@RequestBody FacilityType name){
         var result = facilityService.addFacilitiesType(name);
