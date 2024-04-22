@@ -26,7 +26,6 @@ public class FacilityTypeController {
         );
     }
 
-    @CrossOrigin(origins = "https://travelease-admin.netlify.app/", methods = {RequestMethod.POST})
     @PostMapping("/facility-type/add")
     public ResponseStatus addFacilityType(@RequestBody FacilityType name){
         var result = facilityService.addFacilitiesType(name);
