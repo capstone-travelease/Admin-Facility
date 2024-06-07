@@ -90,6 +90,7 @@ public class FacilityService {
     /* Delete Facilities */
     public Integer deleteFacilities(Integer facilityId){
         try{
+            facilityRepository.deleteHotelFacility(facilityId);
             facilityRepository.deleteFacility(facilityId);
             return 1;
         }
